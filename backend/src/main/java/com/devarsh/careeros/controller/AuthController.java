@@ -1,5 +1,7 @@
 package com.devarsh.careeros.controller;
 
+import com.devarsh.careeros.dto.AuthResponse;
+import com.devarsh.careeros.dto.LoginRequest;
 import com.devarsh.careeros.dto.RegisterRequest;
 import com.devarsh.careeros.dto.UserResponse;
 import com.devarsh.careeros.service.AuthService;
@@ -25,5 +27,10 @@ public class AuthController {
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
         UserResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }

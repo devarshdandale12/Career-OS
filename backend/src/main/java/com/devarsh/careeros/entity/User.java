@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -27,4 +29,6 @@ public class User extends BaseEntity{
 
     @Column(nullable = false)
     private boolean enabled = true;
+
+    private LocalDateTime lastLoginAt;
 }

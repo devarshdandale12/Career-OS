@@ -4,6 +4,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,6 +47,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleDatabaseConflict(DataIntegrityViolationException ex) {
         return buildResponse(HttpStatus.CONFLICT,
                 "This data conflicts with existing data", Map.of());
+    }
+
+    // Wrong email or wrong password
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentials(BadCredentialsException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, "Invalid email or password", Map.of());
+    }
+
+    // The account exists, but an admin has disabled it
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<ErrorResponse> handleDisabled(DisabledException ex) {
+        return buildResponse(HttpStatus.FORBIDDEN, "This account has been disabled", Map.of());
     }
 
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message,
