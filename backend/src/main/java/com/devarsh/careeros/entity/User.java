@@ -13,7 +13,7 @@ import lombok.Setter;
 public class User extends BaseEntity{
 
     @Column(nullable = false, length = 100)
-    private String fullNmae;
+    private String fullName;
 
     @Column(nullable = false, unique = true)
     private String email;
