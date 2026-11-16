@@ -61,6 +61,18 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.FORBIDDEN, "This account has been disabled", Map.of());
     }
 
+    // Something does not exist (user, education, skill...)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), Map.of());
+    }
+
+    // The request breaks a business rule
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), Map.of());
+    }
+
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message,
                                                         Map<String, String> errors) {
         ErrorResponse body = new ErrorResponse(status.value(), message, errors, LocalDateTime.now());
