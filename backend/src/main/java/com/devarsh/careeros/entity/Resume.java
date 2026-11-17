@@ -2,9 +2,6 @@ package com.devarsh.careeros.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
@@ -22,11 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Resume extends BaseEntity {
+public class Resume extends ProfileOwnedEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "profile_id", nullable = false)
-    private Profile profile;
 
     @Column(nullable = false, length = 100)
     private String title;

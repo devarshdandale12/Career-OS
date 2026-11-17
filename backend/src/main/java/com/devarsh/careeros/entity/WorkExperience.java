@@ -12,11 +12,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WorkExperience extends BaseEntity{
+public class WorkExperience extends ProfileOwnedEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "profile_id", nullable = false)
-    private Profile profile;
 
     @Column(nullable = false, length = 150)
     private String companyName;
