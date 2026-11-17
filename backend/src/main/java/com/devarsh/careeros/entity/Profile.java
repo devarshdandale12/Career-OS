@@ -32,11 +32,11 @@ public class Profile extends BaseEntity{
     private String summary;
 
     @Column
-    private String linkedInUrl;
+    private String linkedinUrl;
     @Column
     private String githubUrl;
     @Column
-    private String portFolioUrl;
+    private String portfolioUrl;
     @Column
     private String profilePhotoUrl;
 

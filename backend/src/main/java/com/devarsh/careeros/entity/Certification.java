@@ -32,5 +32,5 @@ public class Certification extends BaseEntity{
     private String credentialId;
 
     @Column(length = 100)
-    private String getCredentialUrl;
+    private String credentialUrl;
 }
